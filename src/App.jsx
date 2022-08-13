@@ -1,17 +1,73 @@
 import "./App.css";
-
-import { useState } from "react";
-import(useState);
+import React, { useState } from "react";
 
 function App() {
+  const [firstNumber, setfirstNumber] = useState(0);
+  const [operation, setOperation] = useState(null);
+  const [secondNumber, setSecondNumber] = useState(null);
+
+  const getNumber = (number) => {
+    if (secondNumber === 0) {
+      setSecondNumber(number);
+    } else if (secondNumber) {
+      setSecondNumber("" + secondNumber + number);
+    } else if (firstNumber === 0) {
+      setfirstNumber(number);
+    } else {
+      setfirstNumber("" + firstNumber + number);
+    }
+  };
+
+  const getOperation = (sign) => {
+    if (sign !== "=") {
+      setOperation(sign);
+      setSecondNumber(0);
+    } else {
+      switch (operation) {
+        case "'+":
+          setfirstNumber(parseFloat(firstNumber) + parseFloat(secondNumber));
+          secondNumber(null);
+          setOperation(null);
+          break;
+        case "-":
+          setfirstNumber(parseFloat(firstNumber) + parseFloat(secondNumber));
+          secondNumber(null);
+          setOperation(null);
+          break;
+        case "x":
+          setfirstNumber(parseFloat(firstNumber) + parseFloat(secondNumber));
+          secondNumber(null);
+          setOperation(null);
+          break;
+        case "÷":
+          setfirstNumber(parseFloat(firstNumber) + parseFloat(secondNumber));
+          secondNumber(null);
+          setOperation(null);
+          break;
+        default:
+          return;
+      }
+    }
+  };
+
+  const getDisplay = () => {
+    if (secondNumber) {
+      return `${firstNumber}${operation}${secondNumber}`;
+    } else if (operation) {
+      return `${firstNumber}${operation}`;
+    } else {
+      return firstNumber;
+    }
+  };
+
   return (
     <div className="d-flex align-items-center justify-content-center mx-auto vh-100 w-100">
       <div id="calculator" className="py-2 rounded">
         <div className="container">
           <div className="row g-2">
             <div className="col-12">
-              <h1 id="display" className="fs-1 my-4 text-end text-white">
-                0
+              <h1 id="firstNumber" className="fs-1 my-4 text-end text-white">
+                {firstNumber}
               </h1>
             </div>
             <div className="col-3">
@@ -19,6 +75,9 @@ function App() {
                 className="button
                             fs-5 fw-bold text-bg-secondary text-center rounded-circle"
                 id="clearMemoryButton"
+                onClick={() => {
+                  window.location.reload();
+                }}
               >
                 C
               </div>
@@ -27,7 +86,11 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-secondary text-center rounded-circle"
-                onclick="switchSign()"
+                onClick={() => {
+                  secondNumber
+                    ? setSecondNumber(secondNumber * -1)
+                    : setfirstNumber(firstNumber * -1);
+                }}
               >
                 ±
               </div>
@@ -36,7 +99,11 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-secondary text-center rounded-circle"
-                onclick="switchToPercent()"
+                onClick={() => {
+                  secondNumber
+                    ? setSecondNumber(secondNumber / 100)
+                    : setfirstNumber(firstNumber / 100);
+                }}
               >
                 %
               </div>
@@ -45,7 +112,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-warning text-center rounded-circle"
-                onclick="clickOperation('/')"
+                onClick={() => {
+                  getOperation("÷");
+                }}
               >
                 ÷
               </div>
@@ -55,7 +124,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber(7)"
+                onClick={() => {
+                  getNumber(7);
+                }}
               >
                 7
               </div>
@@ -64,7 +135,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber(8)"
+                onClick={() => {
+                  getNumber(8);
+                }}
               >
                 8
               </div>
@@ -73,7 +146,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber(9)"
+                onClick={() => {
+                  getNumber(9);
+                }}
               >
                 9
               </div>
@@ -82,7 +157,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-warning text-center rounded-circle"
-                onclick="clickOperation('x')"
+                onClick={() => {
+                  getOperation("x");
+                }}
               >
                 x
               </div>
@@ -92,7 +169,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber(4)"
+                onClick={() => {
+                  getNumber(4);
+                }}
               >
                 4
               </div>
@@ -101,7 +180,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber(5)"
+                onClick={() => {
+                  getNumber(5);
+                }}
               >
                 5
               </div>
@@ -110,7 +191,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber(6)"
+                onClick={() => {
+                  getNumber(6);
+                }}
               >
                 6
               </div>
@@ -119,7 +202,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-warning text-center rounded-circle"
-                onclick="clickOperation('-')"
+                onClick={() => {
+                  getOperation("-");
+                }}
               >
                 -
               </div>
@@ -129,7 +214,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber(1)"
+                onClick={() => {
+                  getNumber(1);
+                }}
               >
                 1
               </div>
@@ -138,7 +225,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber(2)"
+                onClick={() => {
+                  getNumber(2);
+                }}
               >
                 2
               </div>
@@ -147,7 +236,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber(3)"
+                onClick={() => {
+                  getNumber(3);
+                }}
               >
                 3
               </div>
@@ -156,7 +247,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-warning text-center rounded-circle"
-                onclick="clickOperation('+')"
+                onClick={() => {
+                  getOperation("+");
+                }}
               >
                 +
               </div>
@@ -166,7 +259,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-pill"
-                onclick="clickNumber(0)"
+                onClick={() => {
+                  getNumber(0);
+                }}
               >
                 0
               </div>
@@ -175,7 +270,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                onclick="clickNumber('.')"
+                            onClick={() => {
+                                getNumber(".");
+                              }}
               >
                 .
               </div>
@@ -184,7 +281,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-warning text-center rounded-circle"
-                onclick="calculate()"
+                onClick={() => {
+                  getOperation("=");
+                }}
               >
                 =
               </div>
