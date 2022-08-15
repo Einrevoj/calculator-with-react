@@ -1,8 +1,8 @@
-import "./App.css";
 import React, { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [firstNumber, setfirstNumber] = useState(0);
+  const [firstNumber, setFirstNumber] = useState(0);
   const [operation, setOperation] = useState(null);
   const [secondNumber, setSecondNumber] = useState(null);
 
@@ -12,9 +12,9 @@ function App() {
     } else if (secondNumber) {
       setSecondNumber("" + secondNumber + number);
     } else if (firstNumber === 0) {
-      setfirstNumber(number);
+      setFirstNumber(number);
     } else {
-      setfirstNumber("" + firstNumber + number);
+      setFirstNumber("" + firstNumber + number);
     }
   };
 
@@ -24,24 +24,24 @@ function App() {
       setSecondNumber(0);
     } else {
       switch (operation) {
-        case "'+":
-          setfirstNumber(parseFloat(firstNumber) + parseFloat(secondNumber));
-          secondNumber(null);
+        case "+":
+          setFirstNumber(parseFloat(firstNumber) + parseFloat(secondNumber));
+          setSecondNumber(null);
           setOperation(null);
           break;
         case "-":
-          setfirstNumber(parseFloat(firstNumber) + parseFloat(secondNumber));
-          secondNumber(null);
+          setFirstNumber(parseFloat(firstNumber) - parseFloat(secondNumber));
+          setSecondNumber(null);
           setOperation(null);
           break;
         case "x":
-          setfirstNumber(parseFloat(firstNumber) + parseFloat(secondNumber));
-          secondNumber(null);
+          setFirstNumber(parseFloat(firstNumber) * parseFloat(secondNumber));
+          setSecondNumber(null);
           setOperation(null);
           break;
         case "÷":
-          setfirstNumber(parseFloat(firstNumber) + parseFloat(secondNumber));
-          secondNumber(null);
+          setFirstNumber(parseFloat(firstNumber) / parseFloat(secondNumber));
+          setSecondNumber(null);
           setOperation(null);
           break;
         default:
@@ -66,8 +66,8 @@ function App() {
         <div className="container">
           <div className="row g-2">
             <div className="col-12">
-              <h1 id="firstNumber" className="fs-1 my-4 text-end text-white">
-                {firstNumber}
+              <h1 id="display" className="fs-1 my-4 text-end text-white">
+                {getDisplay()}
               </h1>
             </div>
             <div className="col-3">
@@ -89,7 +89,7 @@ function App() {
                 onClick={() => {
                   secondNumber
                     ? setSecondNumber(secondNumber * -1)
-                    : setfirstNumber(firstNumber * -1);
+                    : setFirstNumber(firstNumber * -1);
                 }}
               >
                 ±
@@ -102,7 +102,7 @@ function App() {
                 onClick={() => {
                   secondNumber
                     ? setSecondNumber(secondNumber / 100)
-                    : setfirstNumber(firstNumber / 100);
+                    : setFirstNumber(firstNumber / 100);
                 }}
               >
                 %
@@ -270,9 +270,9 @@ function App() {
               <div
                 className="button
                             fs-5 fw-bold text-bg-dark text-center rounded-circle"
-                            onClick={() => {
-                                getNumber(".");
-                              }}
+                onClick={() => {
+                  getNumber(".");
+                }}
               >
                 .
               </div>

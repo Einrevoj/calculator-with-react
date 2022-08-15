@@ -1,15 +1,9 @@
-.container {
-  padding-top: 200px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin: 15px;
-  border-radius: 50px;
+#calculator {
   background-color: black;
+  width: 320px;
 }
 
-#display {   
-  text-align: right;
-  color: white;
-  
+.button {
+  cursor: pointer;
+  line-height: 70px;
 }
